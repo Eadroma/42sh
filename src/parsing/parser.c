@@ -19,8 +19,8 @@
  */
 static int fill_array(char **array, vec2i_t *index, char *str, vec2i_t *temp)
 {
-    array[index->x] = malloc(sizeof(char) * index->y);
-    array[index->x++] = clean_str(cut_str(str, temp->x, index->y - 1), ' ');
+    array[index->x] = malloc(sizeof(char) * (index->y - temp->x + 1));
+    array[index->x++] = clean_str(cut_str(str, temp->x, index->y), ' ');
     array[index->x] = malloc(sizeof(char) * (temp->y + 1));
     array[index->x++] = clean_str(cut_str(str, index->y, index->y + temp->y),
         ' ');
@@ -33,20 +33,17 @@ static int fill_array(char **array, vec2i_t *index, char *str, vec2i_t *temp)
  * @param array The fully formulated token array.
  * @param index The active limit index pointing to the array ceiling.
  * @param str The baseline processing string.
- * @param last_delim Sequence identifier pointing out trailing data bounds.
+ * @param res String index pointing to the start of the final trailing block.
  * @return The fully realized parsing array matrix.
  */
 static char **terminate_array(char **array, int index, char *str,
-int last_delim)
+int res)
 {
-    array[index] = malloc(sizeof(char) * (strlen(str) - (last_delim == 0 ?
-        last_delim : last_delim + 1)));
-    array[index] = clean_str(cut_str(str, last_delim == 0 ? 0 : last_delim + 2,
-        strlen(str)), ' ');
+    array[index] = malloc(sizeof(char) * (strlen(str) - res + 1));
+    array[index] = clean_str(cut_str(str, res, strlen(str)), ' ');
     array[index + 1] = NULL;
     return array;
 }
-
 
 /**
  * @brief Core lexer matching tokens against logical/pipe delimiters.
@@ -62,23 +59,21 @@ static char **get_args(char *str)
     char **args = malloc(sizeof(char *) * (count_delimitors(str) + 2));
     int tmp = 0;
     int idx = 0;
-    int last_delim = 0;
     int res = 0;
 
-    for (size_t i = 0; str[i]; i += (tmp == 2 ) ? 2 : 1) {
+    for (size_t i = 0; str[i]; i += (tmp == 2) ? 2 : 1) {
         if (!str[i + 1] || !(tmp = is_delimitors(str[i], str[i + 1])))
             continue;
-        if (!(last_delim = i)) {
-            last_delim++;
-            args[idx++] = clean_str(cut_str(str, i + (tmp == 2 ? 1 : 0),
-                i + tmp), ' ');
+        if (res == (int)i) {
+            args[idx++] = clean_str(cut_str(str, i, i + tmp), ' ');
+            res = i + tmp;
             continue;
         }
         idx = fill_array(args, &(vec2i_t){idx, i}, str,
-            &(vec2i_t){res, tmp == 2 ? tmp + 1 : tmp});
-        res = i + 1;
+            &(vec2i_t){res, tmp});
+        res = i + tmp;
     }
-    return terminate_array(args, idx, str, last_delim);
+    return terminate_array(args, idx, str, res);
 }
 
 /**
