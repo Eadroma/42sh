@@ -7,6 +7,14 @@
 
 #include "shell.h"
 
+/**
+ * @brief Executes the built-in 'cd' command to change the current directory.
+ * 
+ * Includes support for standard aliases like '~-' and basic path resolution.
+ * 
+ * @param shell The main shell state.
+ * @return 0 on completion, regardless of success.
+ */
 uchar cd_command(shell_t *shell)
 {
     list_args_t *list = shell->args;

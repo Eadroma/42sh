@@ -7,6 +7,12 @@
 
 #include "shell.h"
 
+/**
+ * @brief Strips literal backslash characters from a string.
+ * 
+ * @param str The string to modify.
+ * @return The modified string pointer.
+ */
 static char *remove_backslashes(char *str)
 {
     for (int i = 0; str[i]; i++)
@@ -15,6 +21,15 @@ static char *remove_backslashes(char *str)
     return str;
 }
 
+/**
+ * @brief Converts escaped character sequences into their actual character equivalents.
+ * 
+ * Resolves standard escape sequences such as \\n or \\t in-place.
+ * 
+ * @param str The string being processed.
+ * @param i The index of the backslash character.
+ * @return The modified string pointer.
+ */
 static char *check_backslash(char *str, int i)
 {
     char next[9] = {'\\', 'a', 'b', 'e', 'f', 'n', 'r', 't', 'v'};
@@ -31,6 +46,12 @@ static char *check_backslash(char *str, int i)
     return str;
 }
 
+/**
+ * @brief Manages backslash interpretation across an entire string.
+ * 
+ * @param str The string containing potential escape sequences.
+ * @return The fully interpreted string pointer.
+ */
 static char *backslashes_management(char *str)
 {
     for (int i = 0; str[i]; i++)
@@ -39,6 +60,13 @@ static char *backslashes_management(char *str)
     return str;
 }
 
+/**
+ * @brief Applies the formatting rules defined by echo flags (e.g., -n, -e, -E).
+ * 
+ * @param line The raw command line used to parse flags.
+ * @param str The accumulated string to process.
+ * @return The formatted string ready for output.
+ */
 static char *check_flags(char *line, char *str)
 {
     bool *flags = get_flags(my_str_to_word_array(line, ' '));
@@ -52,6 +80,14 @@ static char *check_flags(char *line, char *str)
     return str;
 }
 
+/**
+ * @brief Executes the built-in 'echo' command.
+ * 
+ * Prints the provided arguments adhering to requested formatting flags.
+ * 
+ * @param shell The main shell state.
+ * @return 1 upon successful execution.
+ */
 uchar echo_command(shell_t *shell)
 {
     char **array = my_str_to_word_array(shell->args->head->line, ' ');

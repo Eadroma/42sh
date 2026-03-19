@@ -7,6 +7,14 @@
 
 #include "shell.h"
 
+/**
+ * @brief Normalizes a command line string by stripping unnecessary whitespace.
+ * 
+ * Converts newlines to null terminators, tabs to spaces, and removes redundant spaces.
+ * 
+ * @param line The raw input string read from the terminal.
+ * @return The sanitized string pointer.
+ */
 char *clean_cmd_line(char *line)
 {
     for (size_t i = 0; line[i]; i++)

@@ -7,6 +7,13 @@
 
 #include "shell.h"
 
+/**
+ * @brief Removes a specific line from the global environment array.
+ * 
+ * Shifts subsequent elements back one position.
+ * 
+ * @param i The target index in the environment array.
+ */
 static void remove_line_env(size_t i)
 {
     extern char **environ;
@@ -16,6 +23,11 @@ static void remove_line_env(size_t i)
     environ[i] = NULL;
 }
 
+/**
+ * @brief Scans for a variable name in the environment and removes it if found.
+ * 
+ * @param var_name the exact environment variable name to delete.
+ */
 static void check_var_names(char *var_name)
 {
     extern char **environ;
@@ -26,6 +38,14 @@ static void check_var_names(char *var_name)
     printf("unsetenv : %s variable doesn't exists\n", var_name);
 }
 
+/**
+ * @brief Executes the built-in 'unsetenv' command.
+ * 
+ * Iterates through all trailing arguments, removing corresponding env keys.
+ * 
+ * @param shell The main shell state structure.
+ * @return 1 on completion.
+ */
 uchar unsetenv_command(shell_t *shell)
 {
     char **array = my_str_to_word_array(shell->args->head->line, ' ');

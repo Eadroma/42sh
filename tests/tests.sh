@@ -22,3 +22,9 @@ done
 
 echo -e "\e[7m======== Finished tests ========\e[0m"
 echo -e "Passed $passed/${#cmds[@]} tests\n"
+
+if [ "$passed" -eq "${#cmds[@]}" ]; then
+    exit 0
+else
+    exit 1
+fi

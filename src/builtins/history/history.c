@@ -7,6 +7,12 @@
 
 #include "shell.h"
 
+/**
+ * @brief Reads lines from a file stream entirely into a dynamic string array.
+ * 
+ * @param stream The open file stream to read from.
+ * @return NULL-terminated array of strings.
+ */
 char **read_file(FILE *stream)
 {
     int i = 0;
@@ -25,6 +31,11 @@ char **read_file(FILE *stream)
     return file;
 }
 
+/**
+ * @brief Appends the current shell command line to the `.history` file.
+ * 
+ * @param shell The main shell state.
+ */
 void add_to_history(shell_t *shell)
 {
     int fd = open(".history", O_CREAT | O_APPEND | O_WRONLY, S_IRUSR |
@@ -39,6 +50,11 @@ void add_to_history(shell_t *shell)
     close(fd);
 }
 
+/**
+ * @brief Retrieves and prints a specific line relative to history file navigation.
+ * 
+ * @param opt Direction offset (-1 for prev, 1 for next).
+ */
 void read_from_history(int opt) // opt = -1 || opt = 1 (prev or next)
 {
     char **history = read_file(fopen(".history", "r"));
@@ -55,6 +71,12 @@ void read_from_history(int opt) // opt = -1 || opt = 1 (prev or next)
     free_array(history);
 }
 
+/**
+ * @brief Executes the built-in 'history' command, displaying all previous commands.
+ * 
+ * @param shell The main shell state.
+ * @return 0 on success, or 84 if history reading fails.
+ */
 uchar display_history(shell_t *shell)
 {
     char **history = read_file(fopen(".history", "r"));

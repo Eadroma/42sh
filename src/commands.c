@@ -7,6 +7,12 @@
 
 #include "shell.h"
 
+/**
+ * @brief Checks if a command corresponds to a builtin and executes it if so.
+ * 
+ * @param shell The main shell state representation.
+ * @return The result code of the executed builtin or basic command.
+ */
 uchar builtins_loop(shell_t *shell)
 {
     char *cmd_name = check_alias(my_str_to_word_array(shell->args->head->line,
@@ -18,6 +24,16 @@ uchar builtins_loop(shell_t *shell)
     return basic_command(shell);
 }
 
+/**
+ * @brief Executes a delimiter operator handler if it matches known operators.
+ * 
+ * Delimiters include operators like pipes, logic gates, or redirections.
+ * 
+ * @param cmd_name The command/delimiter token identifier.
+ * @param shell The main shell state representation.
+ * @param pos Positional boolean parameters indicating start/end rules.
+ * @return Action/Exit code for the handled delimiter, or 0 if unhandled.
+ */
 static uchar delimitors_loop(char *cmd_name, shell_t *shell, bool2_t pos)
 {
     for (size_t i = 0; i < DELIMITORS_COUNT; i++)
@@ -26,6 +42,15 @@ static uchar delimitors_loop(char *cmd_name, shell_t *shell, bool2_t pos)
     return 0;
 }
 
+/**
+ * @brief Parses commands searching for delimiters to handle logical separations.
+ * 
+ * Iterates over the command argument sequence, delegating to delimiter operations
+ * or builtins evaluation if no active delimiters control the chain.
+ * 
+ * @param shell The main shell state representation.
+ * @return Execution exit code, or 84 on invalid/empty inputs.
+ */
 uchar get_delim(shell_t *shell)
 {
     char *cmd_name = NULL;

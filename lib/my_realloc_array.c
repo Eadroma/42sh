@@ -8,6 +8,15 @@
 #include <stdlib.h>
 #include <string.h>
 
+/**
+ * @brief Re-allocates a null-terminated string array with a new size.
+ * 
+ * Duplicates internal strings safely without double-free risks.
+ * 
+ * @param array Source string array.
+ * @param size The new aggregate size boundary target.
+ * @return The newly allocated padded array, or NULL on failure.
+ */
 char **my_realloc_array(char **array, int size)
 {
     int i = 0;

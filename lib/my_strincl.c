@@ -8,6 +8,13 @@
 #include <stdbool.h>
 #include <string.h>
 
+/**
+ * @brief Checks if a string contains a specific sub-sequence inclusion.
+ * 
+ * @param str The parent string.
+ * @param part The substring sequence to find.
+ * @return true if part is completely included in str sequentially, false otherwise.
+ */
 bool my_strincl(char const *str, char const *part)
 {
     size_t i = 0;

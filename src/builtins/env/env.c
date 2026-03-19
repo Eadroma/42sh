@@ -7,6 +7,12 @@
 
 #include "shell.h"
 
+/**
+ * @brief Executes the built-in 'env' command showing environment variables.
+ * 
+ * @param shell The main shell state.
+ * @return 1 on completion.
+ */
 uchar env_command(shell_t *shell)
 {
     extern char **environ;

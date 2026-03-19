@@ -7,6 +7,13 @@
 
 #include "shell.h"
 
+/**
+ * @brief Appends read command blocks continuously to an active redirection temp file.
+ * 
+ * @param filename File endpoint to redirect lines toward.
+ * @param line String line received to save.
+ * @return 0 on writing correctly, 84 upon open failures.
+ */
 static uchar write_in_file(char *filename, char *line)
 {
     int fd = open(filename, O_WRONLY | O_APPEND);
@@ -19,6 +26,15 @@ static uchar write_in_file(char *filename, char *line)
     return 0;
 }
 
+/**
+ * @brief Captures interactive input iteratively until encountering a specific delimiter tag.
+ * 
+ * Used entirely for the `<<` heredoc mechanic. 
+ * 
+ * @param shell The shell environment representation.
+ * @param filename Target path of temporary extraction file.
+ * @return 0 after delimiter is struck and loop safely breaks.
+ */
 static uchar redirect_loop(shell_t *shell, char *filename)
 {
     char *delim = get_filename(shell);
@@ -41,6 +57,16 @@ static uchar redirect_loop(shell_t *shell, char *filename)
     return 0;
 }
 
+/**
+ * @brief Evaluation controller for double standard input `<<` delimited sequence.
+ * 
+ * Evaluates the heredoc terminal capturing stream and processes the previous 
+ * command piping the internal temporary `.redirect` buffer straight into STDIN.
+ * 
+ * @param shell Standard environment encapsulation.
+ * @param pos Bound checker representation.
+ * @return 0 resolving loop successfully.
+ */
 uchar double_standard_input_redirection(shell_t *shell, bool2_t pos)
 {
     char filename[10] = ".redirect";

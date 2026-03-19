@@ -5,6 +5,15 @@
 ** remove_char
 */
 
+/**
+ * @brief Removes a single character directly from a string in-place by index.
+ * 
+ * Shifts the rest of the string backwards to overwrite it.
+ * 
+ * @param str The modifiable string.
+ * @param i Index of the character targeted for removal.
+ * @return The manipulated string pointer.
+ */
 char *remove_char(char *str, int i)
 {
     for (; str[i + 1]; i++)

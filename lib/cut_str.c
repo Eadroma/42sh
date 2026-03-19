@@ -8,6 +8,14 @@
 #include <stddef.h>
 #include <stdlib.h>
 
+/**
+ * @brief Slices a substring from a given string.
+ * 
+ * @param str The source string.
+ * @param start The starting index (inclusive).
+ * @param end The ending index (exclusive).
+ * @return The allocated sliced substring, or NULL on failure.
+ */
 char *cut_str(char *str, int start, int end)
 {
     char *new_str = malloc(sizeof(char) * (end - start + 1));

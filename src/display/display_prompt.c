@@ -7,6 +7,13 @@
 
 #include "shell.h"
 
+/**
+ * @brief Extracts the last few directories of the current working directory.
+ * 
+ * Truncates the absolute path to keep the prompt compact.
+ * 
+ * @return Pointer within the allocated CWD string representing the local path.
+ */
 static char *get_current_dir(void)
 {
     char *dir = getcwd(NULL, 0);
@@ -22,11 +29,17 @@ static char *get_current_dir(void)
     return dir;
 }
 
+/**
+ * @brief Prints the interactive shell prompt with the current directory.
+ */
 void display_prompt(void)
 {
     printf("[%s]$ ", get_current_dir());
 }
 
+/**
+ * @brief Iterates over the global environ array and prints each key-value pair.
+ */
 void display_env(void)
 {
     extern char **environ;

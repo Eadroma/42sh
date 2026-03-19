@@ -8,6 +8,15 @@
 #include <stdlib.h>
 #include <string.h>
 
+/**
+ * @brief Allocates and concatenates two string sequences iteratively.
+ * 
+ * Custom safe non-destructive alternative to core strcat.
+ * 
+ * @param s1 Left-side source sequence prefix.
+ * @param s2 Right-side source sequence suffix.
+ * @return New allocated merged buffer string pointer.
+ */
 char *my_strcat(char const *s1, char const *s2)
 {
     int len = strlen(s1) + strlen(s2);

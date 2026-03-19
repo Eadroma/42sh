@@ -7,6 +7,12 @@
 
 #include "shell.h"
 
+/**
+ * @brief Parses an entire file stream tracking aliases into a dynamic string array.
+ * 
+ * @param stream The open alias file stream.
+ * @return A NULL-terminated array of alias strings.
+ */
 char **read_alias_file(FILE *stream)
 {
     size_t i = 0;
@@ -26,6 +32,12 @@ char **read_alias_file(FILE *stream)
     return file;
 }
 
+/**
+ * @brief Appends a new alias rule into the persistent `.alias` file and shell list.
+ * 
+ * @param shell The main shell state representation.
+ * @return 0 on completion, 84 if it fails to open the alias file.
+ */
 int write_alias(shell_t *shell)
 {
     int fd = open(".alias", O_CREAT | O_APPEND | O_WRONLY, S_IRUSR | S_IWUSR |
@@ -43,6 +55,11 @@ int write_alias(shell_t *shell)
     return 0;
 }
 
+/**
+ * @brief Reconstructs the shell's alias session list strictly from the local file.
+ * 
+ * @param shell The main shell state representation.
+ */
 void fill_alias(shell_t *shell)
 {
     list_alias_t *list = shell->list_alias;

@@ -7,6 +7,12 @@
 
 #include "shell.h"
 
+/**
+ * @brief Verifies if a given string argument strictly acts as an echo flag.
+ * 
+ * @param str The argument string.
+ * @return true if valid flag format, false otherwise.
+ */
 static bool is_a_flag(char *str)
 {
     if (str[0] != '-')
@@ -17,6 +23,13 @@ static bool is_a_flag(char *str)
     return true;
 }
 
+/**
+ * @brief Checks if a specific flag character is contained within a flag stack string.
+ * 
+ * @param str The full flag string (e.g., "-ne").
+ * @param flag The specific char to look for.
+ * @return true if found, false otherwise.
+ */
 static bool is_flag_present(char *str, char flag)
 {
     for (int i = 1; str[i]; i++)
@@ -25,6 +38,12 @@ static bool is_flag_present(char *str, char flag)
     return false;
 }
 
+/**
+ * @brief Extracts enabled flags from the argument array for the echo command.
+ * 
+ * @param array The parsed arguments array.
+ * @return An allocated boolean array indicating [n_flag, e_flag, E_flag] status.
+ */
 bool *get_flags(char **array)
 {
     bool *flags = malloc(sizeof(bool) * 3);
@@ -43,6 +62,12 @@ bool *get_flags(char **array)
     return flags;
 }
 
+/**
+ * @brief Counts how many leading arguments in the array are formatted as echo flags.
+ * 
+ * @param array The parsed arguments array.
+ * @return The index of the first non-flag argument.
+ */
 int get_flags_strings_nb(char **array)
 {
     int i = 1;

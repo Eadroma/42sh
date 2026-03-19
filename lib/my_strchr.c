@@ -8,6 +8,14 @@
 #include <stddef.h>
 #include <stdlib.h>
 
+/**
+ * @brief Finds the native total character length bounded by formatting rules.
+ * 
+ * Custom fallback implementation of standard strlen.
+ * 
+ * @param str Bounded evaluation string pointer subject.
+ * @return Cumulative numerical character length.
+ */
 int my_strlen(char const *str)
 {
     int i = 0;
@@ -16,6 +24,13 @@ int my_strlen(char const *str)
     return i;
 }
 
+/**
+ * @brief Identifies shifting offset position targeting a fixed mapping char.
+ * 
+ * @param str Base target stream matrix pointer.
+ * @param delim Comparison token.
+ * @return Memory sequence offset mapping indicating targeted offset.
+ */
 char *my_strchr(char *str, char const delim)
 {
     for (; *str && *str != delim; str++);

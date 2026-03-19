@@ -5,3 +5,12 @@
 .redirect
 .pipe
 .alias
+
+# Coverage and Debug
+*.gcda
+*.gcno
+vg*
+
+# Editor backups
+*~
+*.swp

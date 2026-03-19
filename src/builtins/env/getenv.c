@@ -7,6 +7,13 @@
 
 #include "shell.h"
 
+/**
+ * @brief Checks if an environment key starts with a specific search string.
+ * 
+ * @param to_find The string key to find.
+ * @param env The environment variable string.
+ * @return 1 if found matching length, 0 otherwise.
+ */
 static int check_key(char const *to_find, char *env)
 {
     int res = 0;
@@ -17,6 +24,12 @@ static int check_key(char const *to_find, char *env)
     return res == my_strlen(to_find);
 }
 
+/**
+ * @brief Searches for an environment variable by name.
+ * 
+ * @param to_find The environment variable key.
+ * @return Pointer within the environment string, or NULL if missing.
+ */
 char *search_env(char const *to_find)
 {
     extern char **environ;
@@ -29,6 +42,12 @@ char *search_env(char const *to_find)
     return NULL;
 }
 
+/**
+ * @brief Executes a command to retrieve and print a specific environment variable.
+ * 
+ * @param shell The main shell state.
+ * @return 0 upon successful printing.
+ */
 uchar getenv_command(shell_t *shell)
 {
 

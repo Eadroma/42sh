@@ -7,6 +7,11 @@
 
 #include "shell.h"
 
+/**
+ * @brief Displays the active custom aliases stored in the .alias file.
+ * 
+ * @return 0 on success, 1 on read failure.
+ */
 int display_alias(void)
 {
     char **alias = read_alias_file(fopen(".alias", "r"));
@@ -18,6 +23,12 @@ int display_alias(void)
     return 0;
 }
 
+/**
+ * @brief Resolves an alias by finding its definition in the .alias file.
+ * 
+ * @param to_find The alias key to locate.
+ * @return 0 if found and printed, 1 if missing.
+ */
 int find_alias(char *to_find)
 {
     char **alias = read_alias_file(fopen(".alias", "r"));
@@ -33,6 +44,15 @@ int find_alias(char *to_find)
     return 1;
 }
 
+/**
+ * @brief Executes the built-in 'alias' command.
+ * 
+ * Depending on argument length, either displays aliases, searches for a specific alias,
+ * or writes a new alias.
+ * 
+ * @param shell The main shell context.
+ * @return Execution exit code.
+ */
 uchar alias_command(shell_t *shell)
 {
     char **args = my_str_to_word_array(shell->args->head->line, ' ');

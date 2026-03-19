@@ -7,6 +7,12 @@
 
 #include "shell.h"
 
+/**
+ * @brief Checks if a given substring contains any active parsing delimiters.
+ * 
+ * @param to_check The string to evaluate.
+ * @return true if a delimiter is found within, false otherwise.
+ */
 bool check_delimitors(char *to_check)
 {
     for (size_t i = 0; delimitors[i]; i++)
@@ -15,6 +21,13 @@ bool check_delimitors(char *to_check)
     return false;
 }
 
+/**
+ * @brief Verifies if a character (and potentially its neighbor) forms a known delimiter.
+ * 
+ * @param c The primary character to check.
+ * @param next The subsequent character for double delimiters like `&&` or `||`.
+ * @return The sequence length of the matched delimiter (1 or 2), or 0 if ignored.
+ */
 int is_delimitors(char c, char next)
 {
     for (size_t i = 0; delimitors[i]; i++)
@@ -23,6 +36,12 @@ int is_delimitors(char c, char next)
     return 0;
 }
 
+/**
+ * @brief Counts the total character length of all strict delimiters in a command line.
+ * 
+ * @param to_check The string containing potential delimiters.
+ * @return The total aggregate count.
+ */
 int count_delimitors(char *to_check)
 {
     int count = 0;

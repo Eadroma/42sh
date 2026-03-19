@@ -81,6 +81,6 @@ re:	fclean all
 
 tests:
 	@make re
-	exec ./test/tests.sh
+	exec ./tests/tests.sh
 
-.PHONY: all clean fclean re lib vg
+.PHONY: all clean fclean re lib vg tests

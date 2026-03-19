@@ -7,6 +7,13 @@
 
 #include "shell.h"
 
+/**
+ * @brief Allocates and initializes a new argument node.
+ * 
+ * @param array The command string to store in the node.
+ * @param is_delim Boolean indicating if this node represents a delimiter.
+ * @return Newly allocated args_t node pointer.
+ */
 args_t *create_node(char *array, bool is_delim)
 {
     args_t *args = malloc(sizeof(args_t));
@@ -20,6 +27,12 @@ args_t *create_node(char *array, bool is_delim)
     return args;
 }
 
+/**
+ * @brief Inserts an argument node at the end of a doubly linked circular list.
+ * 
+ * @param head Pointer to the head of the circular list.
+ * @param node Pointer to the node to insert.
+ */
 void insert_node(args_t *head, args_t *node)
 {
     head->prev->next = node;
@@ -28,6 +41,15 @@ void insert_node(args_t *head, args_t *node)
     node->next = head;
 }
 
+/**
+ * @brief Appends a node to the general arguments list structure.
+ * 
+ * Initializes the list with the node if the list is empty, otherwise inserts it.
+ * 
+ * @param list The main list tracking structure.
+ * @param node The node to append.
+ * @return true if appended successfully, false if node is NULL.
+ */
 bool append_node(list_args_t *list, args_t *node)
 {
     if (!node)
@@ -43,6 +65,13 @@ bool append_node(list_args_t *list, args_t *node)
     return true;
 }
 
+/**
+ * @brief Removes and returns a node from the list based on its index.
+ * 
+ * @param list The list to remove from.
+ * @param index The 0-based positional index of the node to pop.
+ * @return The popped argument node pointer.
+ */
 args_t *pop_index_node(list_args_t *list, int index)
 {
     args_t *node = list->head;
@@ -55,6 +84,13 @@ args_t *pop_index_node(list_args_t *list, int index)
     return node;
 }
 
+/**
+ * @brief Pops a specific node by reference from the doubly linked list.
+ * 
+ * @param list The list object containing the node tracking data.
+ * @param node The actual node pointer to be detached.
+ * @return The detached argument node pointer.
+ */
 args_t *pop_node(list_args_t *list, args_t *node)
 {
     node->prev->next = node->next;

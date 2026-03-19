@@ -7,6 +7,13 @@
 
 #include "shell.h"
 
+/**
+ * @brief Handles error conditions specific to the setup of pipe descriptors.
+ * 
+ * @param pos Current sequence boundary details.
+ * @param pipefd The pointer to the pipe file descriptors array.
+ * @return 84 on invalid command or pipe creation failure, 0 otherwise.
+ */
 static uchar error_management(bool2_t pos, int *pipefd)
 {
     if (pos.is_first || pos.is_last) {
@@ -20,12 +27,29 @@ static uchar error_management(bool2_t pos, int *pipefd)
     return 0;
 }
 
+/**
+ * @brief Adjusts the current shell's file descriptors to leverage pipes.
+ * 
+ * @param shell The main shell state.
+ * @param to_dup The pipe endpoint fd to store/use.
+ * @param to_close The remaining pipe endpoint to discard.
+ */
 static void prepare_to_dup(shell_t *shell, int to_dup, int to_close)
 {
     close(to_close);
     shell->fd = to_dup;
 }
 
+/**
+ * @brief Main evaluation routine for the pipe `|` operator.
+ * 
+ * Employs a temporary `.pipe` file to route standard output of the first
+ * command into the standard input of the subsequent command.
+ * 
+ * @param shell The main shell state representation.
+ * @param pos Command block bound tracking.
+ * @return Pipeline exit status codes.
+ */
 uchar my_pipe(shell_t *shell, bool2_t pos)
 {
     char filename[6] = ".pipe";

@@ -7,6 +7,16 @@
 
 #include "shell.h"
 
+/**
+ * @brief Operator evaluator for the standard input redirection `<`.
+ * 
+ * Alters STDIN to securely pull direct from a referenced path descriptor, allowing commands 
+ * to act natively as if input sourced locally.
+ * 
+ * @param shell Active internal state reference pointer.
+ * @param pos Sequence boundary indicator parameter.
+ * @return 0 upon successful command bridging.
+ */
 uchar simple_standard_input_redirection(shell_t *shell, bool2_t pos)
 {
     char *filename = get_filename(shell);

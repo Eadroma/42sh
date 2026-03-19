@@ -7,6 +7,11 @@
 
 #include "shell.h"
 
+/**
+ * @brief Allocates and initializes an empty argument tracking list structure.
+ * 
+ * @return Newly allocated list_args_t pointer. Exits if allocation fails.
+ */
 static list_args_t *init_list(void)
 {
     list_args_t *list = malloc(sizeof(list_args_t));
@@ -18,6 +23,13 @@ static list_args_t *init_list(void)
     return list;
 }
 
+/**
+ * @brief Allocates and initializes the main shell state.
+ * 
+ * Sets up file descriptors, argument lists, and user aliases.
+ * 
+ * @return Newly allocated shell_t state object. Exits on failure.
+ */
 shell_t *init_shell(void)
 {
     shell_t *shell = malloc(sizeof(shell_t));

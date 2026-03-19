@@ -7,6 +7,15 @@
 
 #include "shell.h"
 
+/**
+ * @brief Allocates an open writing or appending file descriptor depending on operator.
+ * 
+ * Adjust flags to accommodate append conditions dynamically.
+ * 
+ * @param shell Global state managing fd targeting struct variables.
+ * @param filename File path location to connect mapping toward.
+ * @return Descriptor connection offset ID.
+ */
 static uchar get_fd(shell_t *shell, char *filename)
 {
     shell->fd = (my_strcmp(shell->args->head->line, ">")) ?
@@ -22,6 +31,15 @@ static uchar get_fd(shell_t *shell, char *filename)
     return 0;
 }
 
+/**
+ * @brief Maps native standard output descriptors to open file descriptors.
+ * 
+ * Addresses both `>` and `>>` output redirection handling logic.
+ * 
+ * @param shell The environment pipeline context object.
+ * @param pos Sequence placement indication.
+ * @return 0 post valid evaluation, 84 directly on descriptor open errors.
+ */
 uchar standard_output_redirection(shell_t *shell, bool2_t pos)
 {
     char *filename = get_filename(shell);
