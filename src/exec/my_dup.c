@@ -20,9 +20,10 @@ uchar my_dup(shell_t *shell, int fd)
 
 uchar reset_fd(shell_t *shell, int save, int fd)
 {
+    (void)shell;
     if (dup2(save, fd) == -1) {
         perror("dup2");
-        return;
+        return 84;
     };
     close(save);
     return 0;

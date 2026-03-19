@@ -8,23 +8,6 @@
 #include "shell.h"
 
 /**
- * @brief Handles formatting sequence errors relating to the '&&' operator.
- * 
- * @param pos The relative structural positioning parameters.
- * @return 84 on invalid conditions, 0 otherwise.
- */
-static uchar error_management(bool2_t pos)
-{
-    if (pos.is_first && pos.is_last)
-        return 84;
-    if (pos.is_last) {
-        printf("Invalid null command.\n");
-        return 84;
-    }
-    return 0;
-}
-
-/**
  * @brief Handles logic execution surrounding the '&&' logical AND delimiter.
  * 
  * @param shell The main shell state.
@@ -33,6 +16,7 @@ static uchar error_management(bool2_t pos)
  */
 uchar and_delimitor(shell_t *shell, bool2_t pos)
 {
+    (void)pos;
     shell->args->head = shell->args->head->prev;
     builtins_loop(shell);
     shell->args->head = shell->args->head->next->next;

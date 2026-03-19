@@ -16,6 +16,8 @@
  */
 uchar redirections_error_management(shell_t *shell, bool2_t pos)
 {
+    (void)shell;
+    (void)pos;
     return 0;
 }
 

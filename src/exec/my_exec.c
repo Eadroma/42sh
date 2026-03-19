@@ -29,6 +29,7 @@ uchar my_exec(args_t *args)
 
 uchar my_fork(shell_t *shell)
 {
+    (void)shell;
     pid_t child = fork();
     int status = 0;
 
@@ -47,11 +48,7 @@ uchar my_fork(shell_t *shell)
 }
 
 uchar basic_command(shell_t *shell)
-{
-    char *cmd_name = check_alias(my_str_to_word_array(shell->args->head->line,
-        ' ')[0]);
-
-    if (my_fork(shell) == 2)
+{    if (my_fork(shell) == 2)
         my_exec(pop_node(shell->args, shell->args->head));
     return 1;
 }

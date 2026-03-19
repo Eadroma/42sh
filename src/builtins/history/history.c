@@ -79,6 +79,7 @@ void read_from_history(int opt) // opt = -1 || opt = 1 (prev or next)
  */
 uchar display_history(shell_t *shell)
 {
+    (void)shell;
     char **history = read_file(fopen(".history", "r"));
 
     if (!history)

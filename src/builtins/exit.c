@@ -17,5 +17,6 @@
  */
 uchar exit_command(shell_t *shell)
 {
+    (void)shell;
     exit(0);
 }

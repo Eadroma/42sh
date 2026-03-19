@@ -15,6 +15,7 @@
  */
 uchar env_command(shell_t *shell)
 {
+    (void)shell;
     extern char **environ;
 
     for (size_t i = 0; environ[i]; i++)
