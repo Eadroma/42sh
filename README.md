@@ -1,6 +1,6 @@
 # 42sh
 
-[![Build Status](https://travis-ci.com/Eadroma/42sh.svg?branch=main)](https://travis-ci.com/github/Eadroma/42sh) | [![Codacy Badge](https://api.codacy.com/project/badge/Grade/ce23e0d0d8e54462aa4dc15b04f61041)](https://app.codacy.com/gh/Eadroma/42sh?utm_source=github.com&utm_medium=referral&utm_content=Eadroma/42sh&utm_campaign=Badge_Grade)
+[![Build Status](https://github.com/Eadroma/42sh/actions/workflows/tests.yml/badge.svg)](https://github.com/Eadroma/42sh/actions/workflows/tests.yml) | [![Codacy Badge](https://api.codacy.com/project/badge/Grade/ce23e0d0d8e54462aa4dc15b04f61041)](https://app.codacy.com/gh/Eadroma/42sh?utm_source=github.com&utm_medium=referral&utm_content=Eadroma/42sh&utm_campaign=Badge_Grade)
 
 ## Overview
 
@@ -86,4 +86,4 @@ You can also request a summary using the `-h` flag (Help mode):
 
 ## Contributing
 
-Created in 2020 by Victoire Rabeau and contributors for the Epitech "42sh" project.
+Created in 2020 by Victoire Rabeau & Saif Boukottaya for the Epitech "42sh" project.
