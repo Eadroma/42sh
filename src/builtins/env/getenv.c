@@ -16,12 +16,13 @@
  */
 static int check_key(char const *to_find, char *env)
 {
+    int len = my_strlen(to_find);
     int res = 0;
 
-    for (int i = 0; i != my_strlen(to_find); i++)
+    for (int i = 0; i < len; i++)
         if (to_find[i] == env[i])
             res++;
-    return res == my_strlen(to_find);
+    return (res == len && env[len] == '=');
 }
 
 /**
