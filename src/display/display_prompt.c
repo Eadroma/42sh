@@ -34,7 +34,8 @@ static char *get_current_dir(void)
  */
 void display_prompt(void)
 {
-    printf("[%s]$ ", get_current_dir());
+    if (isatty(STDIN_FILENO))
+        printf("[%s]$ ", get_current_dir());
 }
 
 /**
