@@ -45,7 +45,7 @@ void add_to_history(shell_t *shell)
         perror("open");
         return;
     }
-    write(fd, shell->command_line, strlen(shell->command_line));
+    write(fd, shell->command_line, my_strlen(shell->command_line));
     write(fd, "\n", 1);
     close(fd);
 }
@@ -85,7 +85,7 @@ uchar display_history(shell_t *shell)
     if (!history)
         return 84;
     for (size_t i = 0; history[i]; i++)
-        printf("\t%ld\t%s\n", i, history[i]);
+        printf("\t%zu\t%s\n", i, history[i]);
     free_array(history);
     return 0;
 }

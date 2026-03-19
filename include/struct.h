@@ -5,10 +5,12 @@
 ** struct
 */
 
-#include <stddef.h>
-#include <stdio.h>
 #ifndef STRUCT_H_
 #define STRUCT_H_
+
+#include <stddef.h>
+#include <stdio.h>
+#include <stdbool.h>
 
 typedef unsigned char uchar;
 
@@ -24,17 +26,18 @@ enum separators_index
     semicolon
 };
 
-typedef struct vec2i_s
-{
-    int x;
-    int y;
-} vec2i_t;
 
 typedef struct bool2_s
 {
     bool is_first;
     bool is_last;
 } bool2_t;
+
+typedef struct vec2i_s
+{
+    int x;
+    int y;
+} vec2i_t;
 
 static const char *delimitors[] = {"&&", "|","<", ">", ";"};
 static const int max_delimitors = sizeof(delimitors) / sizeof(*delimitors);

@@ -5,12 +5,13 @@
 ** builtin
 */
 
+#ifndef BUILTINS_H_
+#define BUILTINS_H_
+
 #include "struct.h"
 
 #include <unistd.h>
-
-#ifndef BUILTINS_H_
-#define BUILTINS_H_
+#include <stdio.h>
 
 typedef unsigned char uchar;
 

@@ -6,7 +6,8 @@
 */
 
 #include <stdbool.h>
-#include <string.h>
+#include <stddef.h>
+#include "my.h"
 
 /**
  * @brief Checks if a string contains a specific sub-sequence inclusion.
@@ -18,12 +19,12 @@
 bool my_strincl(char const *str, char const *part)
 {
     size_t i = 0;
-    int len = strlen(str);
+    int len = my_strlen(str);
 
-    if (len < strlen(part))
+    if (len < my_strlen(part))
         return false;
     for (; str[i] && str[i] != part[0]; i++);
-    if (i == len)
+    if ((int)i == len)
         return false;
     for (size_t j = 0; str[i] && part[j]; i++, j++)
         if (str[i] != part[j])

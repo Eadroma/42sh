@@ -24,7 +24,7 @@ char **my_realloc_array(char **array, int size)
 
     if (!new)
         return NULL;
-    for (; array[i] && i < size; i++) {
+    for (; i < size && array[i]; i++) {
         new[i] = malloc(sizeof(char) * (strlen(array[i]) + 1));
         if (!new[i])
             return NULL;

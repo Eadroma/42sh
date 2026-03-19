@@ -48,7 +48,8 @@ uchar my_fork(shell_t *shell)
 }
 
 uchar basic_command(shell_t *shell)
-{    if (my_fork(shell) == 2)
+{
+    if (my_fork(shell) == 2)
         my_exec(pop_node(shell->args, shell->args->head));
     return 1;
 }

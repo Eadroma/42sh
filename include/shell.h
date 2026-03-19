@@ -5,6 +5,8 @@
 ** shell
 */
 
+#ifndef SHELL_H_
+#define SHELL_H_
 
 #include "my.h"
 #include "builtin.h"
@@ -18,9 +20,7 @@
 #include <string.h>
 #include <fcntl.h>
 #include <errno.h>
-
-#ifndef SHELL_H_
-#define SHELL_H_
+#include <stdio.h>
 
 
 int shell_loop(void);

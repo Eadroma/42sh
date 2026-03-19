@@ -39,8 +39,8 @@ static int fill_array(char **array, vec2i_t *index, char *str, vec2i_t *temp)
 static char **terminate_array(char **array, int index, char *str,
 int res)
 {
-    array[index] = malloc(sizeof(char) * (strlen(str) - res + 1));
-    array[index] = clean_str(cut_str(str, res, strlen(str)), ' ');
+    array[index] = malloc(sizeof(char) * (my_strlen(str) - res + 1));
+    array[index] = clean_str(cut_str(str, res, my_strlen(str)), ' ');
     array[index + 1] = NULL;
     return array;
 }
@@ -89,7 +89,7 @@ void get_input(shell_t *shell)
     list_args_t *list = shell->args;
     char **tokens = NULL;
 
-    if (!shell->command_line || strlen(shell->command_line) < 2)
+    if (!shell->command_line || my_strlen(shell->command_line) < 2)
         return;
     tokens = get_args(shell->command_line);
     for (size_t i = 0; tokens[i]; i++)
